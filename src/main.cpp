@@ -1,17 +1,11 @@
-#define GLFW_INCLUDE_NONE
-
-#include <GLFW/glfw3.h>
-#include "../libs/glad/include/glad/gl.h"
+#include "headers/App.hpp"
 
 #include <iostream>
-#include <glm/glm.hpp>
 
 int main()
 {
-    glfwInit();
-
-    glfwTerminate();
-    
+    App app("Hello world");
+    app.run();
 
     return 0;
 }
