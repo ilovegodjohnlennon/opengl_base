@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.25)
 
 project(gl_test)
 
-add_executable(${PROJECT_NAME} src/main.cpp)
+add_executable(${PROJECT_NAME} src/main.cpp src/Window.cpp)
 
 
 add_library(STB_IMAGE "libs/stb_image/stb_image.cpp")

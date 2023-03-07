@@ -1,6 +1,7 @@
 #pragma once
 
 #include "libs/glad/include/glad/gl.h"
+#include <glm/glm.hpp>
 
 #include <string>
 #include <fstream>
@@ -88,6 +89,11 @@ public:
     void setFloat(const std::string &name, float value) const
     {
         glUniform1f(glGetUniformLocation(ID, name.c_str()), value);
+    }
+
+    void setMat4(const std::string& name, const glm::mat4x4& value) const
+    {
+        glUniformMatrix4fv(glGetUniformLocation(ID, name.c_str()), 1, GL_FALSE, glm::value_ptr(value));
     }
 
 private:

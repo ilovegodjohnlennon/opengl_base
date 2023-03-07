@@ -1,34 +1,41 @@
 #pragma once
 
-#include "VAO.hpp"
 #include "Window.hpp"
-
+#include "Scene.hpp"
 class App
 {
 private:
     Window window;
-    VAO triangle;
-    Shader mainShader;
+    Scene currentScene;
 
 public:
 
     App(const char* title, int winWidth = 800, int winHeight = 600):
-        window(title, winWidth, winHeight),
-        triangle({{-0.5f, -0.5f, 0.0f},
-                  { 0.5f, -0.5f, 0.0f},
-                  { 0.0f,  0.5f, 0.0f}}),
-        mainShader("../shaders/vertex.glsl", "../shaders/fragment.glsl")
+        window(title, winWidth, winHeight)
     {
 
     }
 
-    void run() const
+    void run()
     {
+        InputMap inputMap;
+        float deltaTime;
+        float lastTime = window.getTime();
+        float currentTime;
+
         while(!window.shouldClose())
         {
-            window.processInput();
+            currentTime = window.getTime();
+            deltaTime = currentTime - lastTime;
+            lastTime = currentTime;
+            
 
-            triangle.draw(mainShader);
+            inputMap = window.processInput();
+
+            currentScene.update(inputMap, deltaTime);
+
+            window.clear();
+            currentScene.render();
 
             window.pollEvents();
             window.swapBuffers();
