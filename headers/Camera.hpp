@@ -17,8 +17,8 @@ private:
     float yaw = 0.0f;
     float pitch = 0.0f;
 
-    glm::mat4x4 viewMatrix;
-    glm::mat4x4 projMatrix;
+    glm::mat4 viewMatrix;
+    glm::mat4 projMatrix;
 
     float fov = 70.0f;
     float aspect = 1.0f;
@@ -76,39 +76,9 @@ public:
 
 private:
     // recalculate orientation vectors according to pitch and yaw
-    void recalculateOrientation()
-    {
-        float p = glm::radians(pitch);
-        float y = glm::radians(yaw);
-
-        cameraDir.x = glm::cos(p) * glm::sin(y);
-        cameraDir.y = glm::sin(p);
-        cameraDir.z = glm::cos(p) * glm::cos(y);
-
-        cameraDir = glm::normalize(cameraDir);
-        cameraRight = glm::normalize(glm::cross(cameraDir, ABSOLUTE_UP));
-
-        cameraUp = glm::normalize(glm::cross(cameraRight, cameraDir));
-        
-        // viewMatrix = glm::lookAt(position, position + cameraDir, cameraUp);
-    }
+    void recalculateOrientation();
 
 public:
-    void moveDir(float dPitch, float dYaw)
-    {
-        pitch += mouseSens * dPitch;
-        if(pitch > 89.0f)
-            pitch = 89.0f;
-        else if(pitch < -89.0f)
-            pitch = -89.0f;
-        
-        yaw += mouseSens * dYaw;
-        if(yaw > 180.0f)
-            yaw -= 360.0f;
-        else if(yaw < -180.0f)
-            yaw += 360.0f;
-        
-        recalculateOrientation();
-    }
+    void moveDir(float dPitch, float dYaw);
 
 };
