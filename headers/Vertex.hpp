@@ -1,8 +1,15 @@
 #pragma once
 
-struct Vertex
+struct VertexPos
 {
     float x;
     float y;
     float z;
+};
+struct Vertex
+{
+    VertexPos pos;
+
+    float textureX;
+    float textureY;
 };

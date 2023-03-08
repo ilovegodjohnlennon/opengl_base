@@ -3,18 +3,21 @@
 #include "InputMap.hpp"
 #include "Camera.hpp"
 #include "VAO.hpp"
+#include "PlaneMesh.hpp"
 
 class Scene
 {
 private:
     Camera camera;
-    VAO triangle;
+    PlaneMesh hug;
     Shader mainShader;
 
 public:
-    Scene() : triangle({{-0.5f, -0.5f, 2.0f},
-                        {0.5f, -0.5f, 2.0f},
-                        {0.0f, 0.5f, 2.0f}}),
+    Scene() : hug({{-0.5f,  0.5f, 2.0f},
+                   { 0.5f,  0.5f, 2.0f},
+                   { 0.5f, -0.5f, 2.0f},
+                   {-0.5f, -0.5f, 2.0f}},
+                   "../assets/hug.png"),
               mainShader("../shaders/vertex.glsl", "../shaders/fragment.glsl")
     {
 
@@ -37,11 +40,11 @@ public:
         camera.recalculateViewMatrix();
     }
 
-    void render() const
+    void render()
     {
         mainShader.setMat4("proj", camera.getProjMatrix());
         mainShader.setMat4("view", camera.getViewMatrix());
-        triangle.draw(mainShader);
+        hug.draw(mainShader);
 
         // camera.__debugPrint();
     }

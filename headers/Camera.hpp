@@ -21,7 +21,7 @@ private:
     glm::mat4 projMatrix;
 
     float fov = 70.0f;
-    float aspect = 1.0f;
+    float aspect = 1.33f;
     float nearPlane = 0.1f;
     float farPlane = 100.0f;
 
